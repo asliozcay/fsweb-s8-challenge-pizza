@@ -14,9 +14,35 @@ header {
 .links{
     text-align: left;
     padding: 0 2rem 2rem 0.25rem;
-    
     color: white;
+    gap: 0.40rem;
+    display: flex;
+    font-size: 1rem;
 }
 .active {
     font-weight: bolder;
+}
+h2{
+    color: #292929;
+    font-size: 1.4rem;
+}
+h3 {
+    color: #292929;
+    font-size: 1.75rem;
+}
+.price-info{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    align-items: center;
+}
+.rating {
+    text-align: end;
+    display: flex;
+    gap: 3rem;
+    color: #5F5F5F;
+}
+.pizza-info {
+    color: #5F5F5F;
+    font-size: 1rem;
 }
