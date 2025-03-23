@@ -3,9 +3,12 @@ header {
     text-align: center;
     display: flex;
     flex-direction: column;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    padding-left: 0.25rem;
 }
 .logo {
-    padding: 4rem;
+    padding-bottom: 2.5rem;
 }
 .navlink {
     text-decoration: none;
@@ -13,28 +16,34 @@ header {
 }
 .links{
     text-align: left;
-    padding: 0 2rem 2rem 0.25rem;
     color: white;
     gap: 0.40rem;
     display: flex;
     font-size: 1rem;
 }
+.info {
+    padding-top: 1.5rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
 .active {
     font-weight: bolder;
 }
-h2{
+.info h2 {
     color: #292929;
     font-size: 1.4rem;
+    padding-top: 1rem;
 }
-h3 {
+.info h3 {
     color: #292929;
     font-size: 1.75rem;
 }
-.price-info{
+.price-info {
     display: flex;
     justify-content: space-between;
     font-size: 1rem;
     align-items: center;
+    padding: 1rem 0;
 }
 .rating {
     text-align: end;
@@ -45,4 +54,5 @@ h3 {
 .pizza-info {
     color: #5F5F5F;
     font-size: 1rem;
+    line-height: 1.5rem;
 }

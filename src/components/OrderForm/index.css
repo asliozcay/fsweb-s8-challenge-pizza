@@ -1,0 +1,40 @@
+
+.size-dough h3 {
+    font-size: 1.25rem;
+    color: #292929;
+    padding-bottom: 0.5rem;
+    padding-top: 1rem;
+    
+}
+.red {
+    color: #CE2829;
+}
+.size-dough {
+    display: flex;
+    gap: 7.7rem;
+    align-items: start;
+    padding-left: 0.25rem;
+}
+.pizza-size, .dough-form {
+line-height: 1.99rem;
+}
+.pizza-toppings {
+    padding-left: 0.25rem;
+    padding-top: 1rem;
+}
+.pizza-toppings p {
+    padding-top: 0.75rem;
+}
+Input {
+    margin-right: 0.5rem;
+}
+.toppings-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75vw;
+    row-gap: 1rem;
+    padding-top: 2.5rem;
+}
+.toppings-container div {
+    min-width: 33%;
+}

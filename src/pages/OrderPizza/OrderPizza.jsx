@@ -1,9 +1,10 @@
 import "./index.css";
 import logo from "../../assets/logo.svg";
+import OrderForm from "../../components/OrderForm/OrderForm";
 
 export default function OrderPizza() {
   return (
-    <>
+    <div className="container"> 
       <header>
         <a className="logo">
           <img src={logo} alt="logo" />
@@ -18,7 +19,7 @@ export default function OrderPizza() {
           </a>
         </nav>
       </header>
-      <div className="info">
+      <section className="info">
           <h2>Position Absolute Acı Pizza</h2>
           <span className="price-info">
           <h3>85.50₺</h3>
@@ -28,7 +29,8 @@ export default function OrderPizza() {
           </span>
           </span>
           <p className="pizza-info">Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.</p>
-        </div>
-    </>
+        </section>
+        <OrderForm />
+    </div>
   );
 }

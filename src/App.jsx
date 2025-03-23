@@ -1,4 +1,4 @@
-import OrderPizza from "./components/OrderPizza/OrderPizza";
+import OrderPizza from "./pages/OrderPizza/OrderPizza";
 
 function App() {
   return <OrderPizza />;
