@@ -1,7 +1,9 @@
-import { Form, FormGroup, Input, Label, Button, ButtonGroup } from "reactstrap";
+import { useEffect, useState } from "react";
+import { Button, ButtonGroup, Form, FormGroup, Input, Label } from "reactstrap";
 import "./index.css";
 
-export default function OrderForm() {
+export default function OrderForm(props) {
+  const { pizzaPrice } = props;
   const toppings = [
     "Pepperoni",
     "Sosis",
@@ -10,7 +12,7 @@ export default function OrderForm() {
     "Soğan",
     "Domates",
     "Mısır",
-    "Sucuk",
+    "Succuk",
     "Jalepeno",
     "Sarımsak",
     "Biber",
@@ -19,18 +21,51 @@ export default function OrderForm() {
     "Kabak",
   ];
 
+  const [selectedToppings, setSelectedToppings] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(pizzaPrice);
+  const [toppingPrice, setToppingPrice] = useState(0);
+  const [orderCount, setOrderCount] = useState(1);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedDough, setSelectedDough] = useState("");
+
+  const handleSizeChange = (e) => {
+    setSelectedSize(e.target.id);
+  };
+  const handleDoughChange = (e) => {
+    setSelectedDough(e.target.value);
+  };
+  const handleToppingChange = (e) => {
+    if (e.target.checked) {
+      setSelectedToppings([...selectedToppings, e.target.id]);
+      setToppingPrice(toppingPrice + 5);
+    } else {
+      setSelectedToppings(
+        selectedToppings.filter((item) => item !== e.target.id)
+      );
+      setToppingPrice(toppingPrice - 5);
+    }
+  };
+
+  useEffect(() => {
+    setTotalPrice(pizzaPrice + toppingPrice);
+  }, [selectedToppings, selectedSize, selectedDough, orderCount]);
+
   return (
     <>
       <section className="pizza-order">
         <div className="container">
           <Form>
             <div className="size-dough">
-              <FormGroup check className="pizza-size">
+              <FormGroup
+                check
+                className="pizza-size"
+                onChange={handleSizeChange}
+              >
                 <h3>
                   Boyut Seç<span className="red"> *</span>
                 </h3>
                 <span>
-                  <Input name="size-radio" type="radio" id="Kucuk" />
+                  <Input name="size-radio" type="radio" id="Kuçuk" />
                   <Label check htmlFor="Kucuk">
                     Küçük
                   </Label>
@@ -48,7 +83,10 @@ export default function OrderForm() {
                   </Label>
                 </span>
               </FormGroup>
-              <FormGroup className="dough-thickness">
+              <FormGroup
+                className="dough-thickness"
+                onChange={handleDoughChange}
+              >
                 <Label htmlFor="dough">
                   <h3>
                     Hamur Seç<span className="red"> *</span>
@@ -62,14 +100,17 @@ export default function OrderForm() {
                 </Input>
               </FormGroup>
             </div>
-            <FormGroup className="pizza-toppings">
+            <FormGroup
+              className="pizza-toppings"
+              onChange={handleToppingChange}
+            >
               <h3>Ek Malzemler</h3>
               <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
               <div className="toppings">
                 {toppings.map((item, index) => {
                   return (
-                    <Label htmlFor={index}>
-                      <Input type="checkbox" id={index} />
+                    <Label htmlFor={item} key={index}>
+                      <Input type="checkbox" id={item} />
                       {item}
                     </Label>
                   );
@@ -91,21 +132,37 @@ export default function OrderForm() {
               <hr />
               <div className="order">
                 <ButtonGroup className="count-group">
-                  <Button className="btn btn-left">-</Button>
-                  <p className="count">1</p>
-                  <Button className="btn btn-right">+</Button>
+                  <Button
+                    className="btn btn-left"
+                    onClick={() => {
+                      if (orderCount > 1) {
+                        setOrderCount(orderCount - 1);
+                      }
+                    }}
+                  >
+                    -
+                  </Button>
+                  <p className="count">{orderCount}</p>
+                  <Button
+                    className="btn btn-right"
+                    onClick={() => {
+                      setOrderCount(orderCount + 1);
+                    }}
+                  >
+                    +
+                  </Button>
                 </ButtonGroup>
                 <div className="order-detail">
                   <div className="order-text">
-                  <h3>Sipariş Toplamı</h3>
-                  <span className="selected">
-                    <p>Seçimler</p>
-                    <p>25.00₺</p>
-                  </span>
-                  <span className="total">
-                    <p>Toplam</p>
-                    <p>110.50₺</p>
-                  </span>
+                    <h3>Sipariş Toplamı</h3>
+                    <span className="selected">
+                      <p>Seçimler</p>
+                      <p>{toppingPrice.toFixed(2)}₺</p>
+                    </span>
+                    <span className="total">
+                      <p>Toplam</p>
+                      <p>{totalPrice.toFixed(2) * orderCount}₺</p>
+                    </span>
                   </div>
                   <Button className="order-submit">Sipariş Ver</Button>
                 </div>

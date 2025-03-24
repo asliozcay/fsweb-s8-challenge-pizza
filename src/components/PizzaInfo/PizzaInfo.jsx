@@ -1,11 +1,13 @@
 import "./index.css";
-export default function PizzaInfo() {
+export default function PizzaInfo(props) {
+const {pizzaPrice} = props
+  
   return (
     <section className="info">
       <div className="container">
         <h2>Position Absolute Acı Pizza</h2>
         <span className="price-info">
-          <h3>85.50₺</h3>
+          <h3>{pizzaPrice.toFixed(2)}₺</h3>
           <span className="rating">
             <p>4.9</p>
             <p>(200)</p>
