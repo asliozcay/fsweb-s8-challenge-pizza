@@ -1,0 +1,25 @@
+header {
+  background-color: #ce2829;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  padding-left: 0.25rem;
+}
+
+.navlink {
+  text-decoration: none;
+  color: white;
+}
+.links {
+  text-align: left;
+  color: white;
+  gap: 0.4rem;
+  display: flex;
+  padding-top: 3rem;
+}
+.active {
+  font-weight: 700;
+}
