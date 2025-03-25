@@ -39,7 +39,7 @@ export default function OrderForm(props) {
   const [name, setName] = useState("");
   const [errors, setErrors] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const isActive =
     selectedToppings.length > 3 &&
@@ -123,6 +123,24 @@ export default function OrderForm(props) {
     navigate("/success");
   };
 
+  const useCheckMobileScreen = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+    const handleWindowSizeChange = () => {
+      setWidth(window.innerWidth);
+    };
+
+    useEffect(() => {
+      window.addEventListener("resize", handleWindowSizeChange);
+      return () => {
+        window.removeEventListener("resize", handleWindowSizeChange);
+      };
+    }, []);
+
+    return width <= 768;
+  };
+
+  const isMobile = useCheckMobileScreen();
+
   useEffect(() => {
     setTotalPrice(pizzaPrice + toppingPrice);
   }, [selectedToppings, selectedSize, selectedDough, orderCount]);
@@ -142,7 +160,12 @@ export default function OrderForm(props) {
                   Boyut Seç<span className="red"> *</span>
                 </h3>
                 <span>
-                  <Input name="size-radio" type="radio" id="Kucuk" data-cy="kucuk-size-input" />
+                  <Input
+                    name="size-radio"
+                    type="radio"
+                    id="Kucuk"
+                    data-cy="kucuk-size-input"
+                  />
                   <Label check htmlFor="Kucuk">
                     Küçük
                   </Label>
@@ -170,7 +193,12 @@ export default function OrderForm(props) {
                     Hamur Seç<span className="red"> *</span>
                   </h3>
                 </Label>
-                <Input id="dough" name="select" type="select" data-cy="dough-select">
+                <Input
+                  id="dough"
+                  name="select"
+                  type="select"
+                  data-cy="dough-select"
+                >
                   <option hidden>Hamur Kalınlığı</option>
                   <option>İnce</option>
                   <option>Orta</option>
@@ -187,10 +215,9 @@ export default function OrderForm(props) {
               <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
               <div className="toppings">
                 {toppings.map((item, index) => {
-                  const datacy = `input-topping-${index}`
+                  const datacy = `input-topping-${index}`;
                   return (
                     <Label htmlFor={item} key={index}>
-                      
                       <Input type="checkbox" id={item} data-cy={datacy} />
                       {item}
                     </Label>
@@ -220,50 +247,107 @@ export default function OrderForm(props) {
                 />
               </Label>
               <hr />
-              <div className="order">
-                <ButtonGroup className="count-group">
-                  <Button
-                    className="btn btn-left"
-                    onClick={() => {
-                      if (orderCount > 1) {
-                        setOrderCount(orderCount - 1);
-                      }
-                    }}
-                  >
-                    -
-                  </Button>
-                  <p className="count">{orderCount}</p>
-                  <Button
-                    className="btn btn-right"
-                    onClick={() => {
-                      setOrderCount(orderCount + 1);
-                    }}
-                  >
-                    +
-                  </Button>
-                </ButtonGroup>
-                <div className="order-detail">
-                  <div className="order-text">
-                    <h3>Sipariş Toplamı</h3>
-                    <span className="selected">
-                      <p>Seçimler</p>
-                      <p>{toppingPrice.toFixed(2)}₺</p>
-                    </span>
-                    <span className="total">
-                      <p>Toplam</p>
-                      <p>{(totalPrice * orderCount).toFixed(2)}₺</p>
-                    </span>
+              {!isMobile ? (
+                <div className="order">
+                  <ButtonGroup className="count-group">
+                    <Button
+                      className="btn btn-left"
+                      onClick={() => {
+                        if (orderCount > 1) {
+                          setOrderCount(orderCount - 1);
+                        }
+                      }}
+                    >
+                      -
+                    </Button>
+                    <p className="count">{orderCount}</p>
+                    <Button
+                      className="btn btn-right"
+                      onClick={() => {
+                        setOrderCount(orderCount + 1);
+                      }}
+                    >
+                      +
+                    </Button>
+                  </ButtonGroup>
+                  <div className="form-submit">
+                    <div className="order-detail">
+                      <div className="order-text">
+                        <h3>Sipariş Toplamı</h3>
+                        <span className="selected">
+                          <p>Seçimler</p>
+                          <p>{toppingPrice.toFixed(2)}₺</p>
+                        </span>
+                        <span className="total">
+                          <p>Toplam</p>
+                          <p>{(totalPrice * orderCount).toFixed(2)}₺</p>
+                        </span>
+                      </div>
+                    </div>
+                    <Button
+                      className={`${
+                        isActive ? "order-submit" : "disabled-btn"
+                      }`}
+                      type="submit"
+                      disabled={!isActive}
+                      data-cy="order-button"
+                    >
+                      Sipariş Ver
+                    </Button>
                   </div>
-                  <Button
-                    className={`${isActive ? "order-submit" : "disabled-btn"}`}
-                    type="submit"
-                    disabled={!isActive}
-                    data-cy="order-button"
-                  >
-                    Sipariş Ver
-                  </Button>
                 </div>
-              </div>
+              ) : (
+                <div className="order">
+                  <div className="form-submit">
+                    <div className="order-detail">
+                      <div className="order-text">
+                        <h3>Sipariş Toplamı</h3>
+                        <span className="selected">
+                          <p>Seçimler</p>
+                          <p>{toppingPrice.toFixed(2)}₺</p>
+                        </span>
+                        <span className="total">
+                          <p>Toplam</p>
+                          <p>{(totalPrice * orderCount).toFixed(2)}₺</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="order-buttons">
+                      <ButtonGroup className="count-group">
+                        <Button
+                          className="btn btn-left"
+                          onClick={() => {
+                            if (orderCount > 1) {
+                              setOrderCount(orderCount - 1);
+                            }
+                          }}
+                        >
+                          -
+                        </Button>
+                        <p className="count">{orderCount}</p>
+                        <Button
+                          className="btn btn-right"
+                          onClick={() => {
+                            setOrderCount(orderCount + 1);
+                          }}
+                        >
+                          +
+                        </Button>
+                      </ButtonGroup>
+                      <Button
+                        className={`${
+                          isActive ? "order-submit" : "disabled-btn"
+                        }`}
+                        type="submit"
+                        disabled={!isActive}
+                        data-cy="order-button"
+                      >
+                        Sipariş Ver
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </FormGroup>
           </Form>
         </div>
