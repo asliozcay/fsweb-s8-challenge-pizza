@@ -16,7 +16,7 @@ export default function Home() {
         </section>
         <main className='home-container'>
             <p>KOD ACIKTIRIR PİZZA, DOYURUR</p>
-            <button onClick={handleClick} className='home-button'>ACIKTIM</button>
+            <button onClick={handleClick} className='home-button' data-cy="home-button" >ACIKTIM</button>
         </main>
 
         </div>

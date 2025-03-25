@@ -142,7 +142,7 @@ export default function OrderForm(props) {
                   Boyut Seç<span className="red"> *</span>
                 </h3>
                 <span>
-                  <Input name="size-radio" type="radio" id="Kucuk" />
+                  <Input name="size-radio" type="radio" id="Kucuk" data-cy="kucuk-size-input" />
                   <Label check htmlFor="Kucuk">
                     Küçük
                   </Label>
@@ -170,7 +170,7 @@ export default function OrderForm(props) {
                     Hamur Seç<span className="red"> *</span>
                   </h3>
                 </Label>
-                <Input id="dough" name="select" type="select">
+                <Input id="dough" name="select" type="select" data-cy="dough-select">
                   <option hidden>Hamur Kalınlığı</option>
                   <option>İnce</option>
                   <option>Orta</option>
@@ -187,9 +187,11 @@ export default function OrderForm(props) {
               <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
               <div className="toppings">
                 {toppings.map((item, index) => {
+                  const datacy = `input-topping-${index}`
                   return (
                     <Label htmlFor={item} key={index}>
-                      <Input type="checkbox" id={item} />
+                      
+                      <Input type="checkbox" id={item} data-cy={datacy} />
                       {item}
                     </Label>
                   );
@@ -206,6 +208,7 @@ export default function OrderForm(props) {
                   placeholder="Lütfen isminizi giriniz."
                   value={name}
                   onChange={handleNameChange}
+                  data-cy="name-input"
                 />
                 {errors.name && <p className="error">{errors.name}</p>}
               </Label>
@@ -255,6 +258,7 @@ export default function OrderForm(props) {
                     className={`${isActive ? "order-submit" : "disabled-btn"}`}
                     type="submit"
                     disabled={!isActive}
+                    data-cy="order-button"
                   >
                     Sipariş Ver
                   </Button>
