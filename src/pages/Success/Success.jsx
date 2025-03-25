@@ -9,6 +9,7 @@ export default function Success() {
     }
   return (
     <div className="success-container">
+      <div className="success-content">
       <header>
         <a onClick={handleClick} href="">
           <img src={logo} alt="logo"  className="success-logo"/>
@@ -17,6 +18,7 @@ export default function Success() {
       <section className="success-container">
       <p>TEBRİKLER!<br />SİPARİŞİNİZ ALINDI!</p>
       </section>
+      </div>
     </div>
   );
 }

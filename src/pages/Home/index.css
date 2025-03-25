@@ -36,3 +36,32 @@
   vertical-align: middle;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .home {
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-position-x: center;
+    background-position-y: 7rem;
+    background-color: #ce2829;
+  }
+  .header {
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .home-container {
+    width: 60vw;
+  }
+
+  .home-button {
+    width: 10.079rem;
+    height: 2.5rem;
+    font-size: 14px;
+    line-height: 42px;
+    margin-top: 2.5rem;
+  }
+  
+}
