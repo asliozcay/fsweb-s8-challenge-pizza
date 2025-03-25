@@ -1,4 +1,4 @@
-header {
+.header-container {
   background-color: #ce2829;
   text-align: center;
   display: flex;
@@ -10,7 +10,7 @@ header {
 }
 
 .navlink {
-  text-decoration: none;
+  text-decoration-line: none;
   color: white;
 }
 .links {

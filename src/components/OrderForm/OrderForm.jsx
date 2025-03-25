@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup, Form, FormGroup, Input, Label } from "reactstrap";
 import "./index.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function OrderForm(props) {
   const { pizzaPrice } = props;
@@ -20,6 +22,13 @@ export default function OrderForm(props) {
     "Ananas",
     "Kabak",
   ];
+  const errorMessages = {
+    size: "Lütfen bir boyut seçiniz.",
+    dough: "Lütfen bir hamur seçiniz.",
+    name: "Lütfen en az 3 karakter olacak şekilde isminizi giriniz.",
+    topping: "En fazla 10 malzeme seçebilirsiniz.",
+    topping2: "Lütfen en az 4 malzeme seçiniz.",
+  };
 
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [totalPrice, setTotalPrice] = useState(pizzaPrice);
@@ -27,23 +36,91 @@ export default function OrderForm(props) {
   const [orderCount, setOrderCount] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedDough, setSelectedDough] = useState("");
+  const [name, setName] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate()
+
+  const isActive =
+    selectedToppings.length > 3 &&
+    selectedToppings.length < 11 &&
+    selectedSize &&
+    selectedDough &&
+    name;
+
+  const validateField = (field, value) => {
+    const newErrors = { ...errors };
+    if (field === "size") {
+      if (!value) newErrors.size = errorMessages.size;
+      else delete newErrors.size;
+    } else if (field === "dough") {
+      if (!value) newErrors.dough = errorMessages.dough;
+      else delete newErrors.dough;
+    } else if (field === "name") {
+      if (!value || value.length <= 3) newErrors.name = errorMessages.name;
+      else delete newErrors.name;
+    } else if (field === "toppings") {
+      if (value.length > 10) newErrors.topping = errorMessages.topping;
+      else delete newErrors.topping;
+      if (value.length < 4) newErrors.topping2 = errorMessages.topping2;
+      else delete newErrors.topping2;
+    }
+    setErrors(newErrors);
+  };
 
   const handleSizeChange = (e) => {
-    setSelectedSize(e.target.id);
+    const value = e.target.id;
+    setSelectedSize(value);
+    validateField("size", value);
   };
+
   const handleDoughChange = (e) => {
-    setSelectedDough(e.target.value);
+    const value = e.target.value;
+    setSelectedDough(value);
+    validateField("dough", value);
   };
+
   const handleToppingChange = (e) => {
+    let newSelectedToppings;
     if (e.target.checked) {
-      setSelectedToppings([...selectedToppings, e.target.id]);
+      newSelectedToppings = [...selectedToppings, e.target.id];
       setToppingPrice(toppingPrice + 5);
     } else {
-      setSelectedToppings(
-        selectedToppings.filter((item) => item !== e.target.id)
+      newSelectedToppings = selectedToppings.filter(
+        (item) => item !== e.target.id
       );
       setToppingPrice(toppingPrice - 5);
     }
+    setSelectedToppings(newSelectedToppings);
+    validateField("toppings", newSelectedToppings);
+  };
+
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+    setName(value);
+    validateField("name", value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(" https://reqres.in/api/pizza", {
+        name: name,
+        size: selectedSize,
+        dough: selectedDough,
+        toppings: selectedToppings,
+        note: e.target.note.value,
+        orderCount: orderCount,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    navigate("/success");
   };
 
   useEffect(() => {
@@ -54,7 +131,7 @@ export default function OrderForm(props) {
     <>
       <section className="pizza-order">
         <div className="container">
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <div className="size-dough">
               <FormGroup
                 check
@@ -65,7 +142,7 @@ export default function OrderForm(props) {
                   Boyut Seç<span className="red"> *</span>
                 </h3>
                 <span>
-                  <Input name="size-radio" type="radio" id="Kuçuk" />
+                  <Input name="size-radio" type="radio" id="Kucuk" />
                   <Label check htmlFor="Kucuk">
                     Küçük
                   </Label>
@@ -82,6 +159,7 @@ export default function OrderForm(props) {
                     Büyük
                   </Label>
                 </span>
+                {errors.size && <p className="error">{errors.size}</p>}
               </FormGroup>
               <FormGroup
                 className="dough-thickness"
@@ -98,6 +176,7 @@ export default function OrderForm(props) {
                   <option>Orta</option>
                   <option>Kalın</option>
                 </Input>
+                {errors.dough && <p className="error">{errors.dough}</p>}
               </FormGroup>
             </div>
             <FormGroup
@@ -116,11 +195,19 @@ export default function OrderForm(props) {
                   );
                 })}
               </div>
+              {errors.topping && <p className="error">{errors.topping}</p>}
+              {errors.topping2 && <p className="error">{errors.topping2}</p>}
             </FormGroup>
             <FormGroup className="checkout">
               <Label htmlFor="name" className="name-input">
                 <h3>İsim</h3>
-                <Input id="name" placeholder="Lütfen isminizi giriniz." />
+                <Input
+                  id="name"
+                  placeholder="Lütfen isminizi giriniz."
+                  value={name}
+                  onChange={handleNameChange}
+                />
+                {errors.name && <p className="error">{errors.name}</p>}
               </Label>
               <Label htmlFor="note" className="note-input">
                 <h3>Sipariş Notu</h3>
@@ -161,10 +248,16 @@ export default function OrderForm(props) {
                     </span>
                     <span className="total">
                       <p>Toplam</p>
-                      <p>{totalPrice.toFixed(2) * orderCount}₺</p>
+                      <p>{(totalPrice * orderCount).toFixed(2)}₺</p>
                     </span>
                   </div>
-                  <Button className="order-submit">Sipariş Ver</Button>
+                  <Button
+                    className={`${isActive ? "order-submit" : "disabled-btn"}`}
+                    type="submit"
+                    disabled={!isActive}
+                  >
+                    Sipariş Ver
+                  </Button>
                 </div>
               </div>
             </FormGroup>
