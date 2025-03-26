@@ -1,3 +1,4 @@
+import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import SuccessMain from "../../components/SuccessMain";
 //import logo from "../../assets/logo.svg";
@@ -11,6 +12,7 @@ export default function Success() {
     <>
     <Header />
     <SuccessMain />
+    <Footer />
     </>
 
    /* <div className=" background-color">

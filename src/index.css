@@ -13,5 +13,5 @@ input::placeholder,
 textarea::placeholder {
   font-family: "Barlow";
   font-size: 0.9rem;
-  line-height: 1.8rem;  
+  line-height: 1.8rem; 
 }
