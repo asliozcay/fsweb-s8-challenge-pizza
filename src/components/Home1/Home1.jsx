@@ -24,8 +24,8 @@ export default function Home1() {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: .5rem;
-    width: auto;
+    padding: 0.5rem;
+    width: 150px;
     &:hover {
       background-color: #292929;
       color: #ffff;
@@ -49,33 +49,33 @@ export default function Home1() {
         </main>
       </div>
       <div className="home-nav">
-      <nav className="nav-items">
-        <StyledLink to="">
-          <img src={icon1} alt="" />
-          YENİ! Kore
-        </StyledLink>
-        <StyledLink to="">
-          <img src={icon2} alt="" />
-          Pizza
-        </StyledLink>
-        <StyledLink to="">
-          <img src={icon3} alt="" />
-          Burger
-        </StyledLink>
-        <StyledLink to="">
-          <img src={icon4} alt="" />
-          Kızartmalar
-        </StyledLink>
-        <StyledLink to="">
-          <img src={icon5} alt="" />
-          Fast Food
-        </StyledLink>
-        <StyledLink to="">
-          <img src={icon6} alt="" />
-          Gazlı İçecek
-        </StyledLink>
-      </nav>
-        </div>
+        <nav className="nav-items1">
+          <StyledLink to="">
+            <img src={icon1} alt="" />
+            YENİ! Kore
+          </StyledLink>
+          <StyledLink to="">
+            <img src={icon2} alt="" />
+            Pizza
+          </StyledLink>
+          <StyledLink to="">
+            <img src={icon3} alt="" />
+            Burger
+          </StyledLink>
+          <StyledLink to="">
+            <img src={icon4} alt="" />
+            Kızartmalar
+          </StyledLink>
+          <StyledLink to="">
+            <img src={icon5} alt="" />
+            Fast Food
+          </StyledLink>
+          <StyledLink to="">
+            <img src={icon6} alt="" />
+            Gazlı İçecek
+          </StyledLink>
+        </nav>
+      </div>
     </>
   );
 }

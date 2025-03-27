@@ -14,7 +14,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 export default function Footer() {
   const Footer = styled.footer`
     background-color: #1a1a1a;
-    width: 100wv;
+    width: 100%;
     height: auto;
     font-family: "Barlow", sans-serif;
     color: #ffffff;
@@ -23,13 +23,24 @@ export default function Footer() {
     display: flex;
     flex-direction: column;
     justify-content: center;
-align-items: center;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
   `;
   const Div = styled.div`
     width: 50%;
     display: flex;
     align-items: center;
     gap: 4rem;
+
+    @media (max-width: 768px) {
+      width: 85%;
+      flex-direction: column;
+      gap: 2rem;
+      padding-bottom: 2rem;
+    }
   `;
   const ContactDiv = styled.div`
     width: 33%;
@@ -37,6 +48,12 @@ align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      align-items: start;
+      text-align: start;
+    }
   `;
   const IconDiv = styled.div`
     display: flex;
@@ -44,6 +61,12 @@ align-items: center;
     align-items: start;
     gap: 1rem;
     padding: 1.25rem 0;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
   `;
   const Logo = styled.img`
     padding: 3rem 0;
@@ -66,6 +89,12 @@ align-items: center;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      align-items: start;
+      text-align: start;
+    }
   `;
 
   const Title = styled(Text)`
@@ -78,6 +107,11 @@ align-items: center;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      grid-template-columns: repeat(3, 1fr);
+    }
   `;
 
   const SocialDiv = styled(ContactDiv)`
@@ -89,18 +123,29 @@ align-items: center;
     width: 105px;
     height: 105px;
     object-fit: cover;
+
+    @media (max-width: 768px) {
+      width: 90px;
+      height: 90px;
+    }
   `;
   const FooterDiv = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 1rem 0;
     width: 50%;
+
+    @media (max-width: 768px) {
+      width: 85%;
+    }
   `;
-    const FooterText = styled.p`
-    font-size: 1rem;`
-    const Line = styled.hr`
-    border: 1px solid #ffffff;
-    opacity: 15%;`
+  const FooterText = styled.p`
+    font-size: 1rem;
+  `;
+  const Line = styled.hr`
+    opacity: 15%;
+    margin: 2rem 0;
+  `;
 
   return (
     <Footer>
@@ -143,11 +188,11 @@ align-items: center;
           </ImgDiv>
         </SocialDiv>
       </Div>
-        <Line />
-        <FooterDiv>
-            <FooterText>© 2023 Teknolojik Yemekler.</FooterText>
-            <FontAwesomeIcon icon={faTwitter} style={{color: "#ffffff",}} />
-        </FooterDiv>
+      <Line />
+      <FooterDiv>
+        <FooterText>©️ 2023 Teknolojik Yemekler.</FooterText>
+        <FontAwesomeIcon icon={faTwitter} style={{ color: "#ffffff" }} />
+      </FooterDiv>
     </Footer>
   );
 }
