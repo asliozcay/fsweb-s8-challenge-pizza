@@ -99,7 +99,8 @@ align-items: center;
     const FooterText = styled.p`
     font-size: 1rem;`
     const Line = styled.hr`
-    border: 1px solid #ffffff;`
+    border: 1px solid #ffffff;
+    opacity: 15%;`
 
   return (
     <Footer>

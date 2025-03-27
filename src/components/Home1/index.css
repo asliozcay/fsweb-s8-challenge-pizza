@@ -1,0 +1,83 @@
+.home {
+  background-image: url("src/assets/home-banner.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 6rem;
+  font-weight: 300;
+  text-align: center;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.home img {
+  padding-top: 1rem !important;
+}
+
+.home-container {
+  width: 50vw;
+}
+
+.home-button {
+  color: #292929;
+  background-color: #fdc913;
+  border-radius: 3.125rem;
+  width: 12.079rem;
+  height: 3.5rem;
+  border: none;
+  font-family: Barlow;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 56px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 1rem;
+  color: #292929;
+  font-family: Barlow;
+  font-weight: 500;
+  font-size: 1.125rem;
+  width: 60%;
+  gap: 1rem;
+}
+
+.home-nav {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding-bottom: 1.6rem;
+}
+
+@media (max-width: 768px) {
+  .home {
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-position-x: center;
+    background-position-y: 7rem;
+    background-color: #ce2829;
+  }
+
+  .home-container {
+    width: 60vw;
+  }
+
+  .home-button {
+    width: 10.079rem;
+    height: 2.5rem;
+    font-size: 14px;
+    line-height: 42px;
+    margin-top: 2.5rem;
+  }
+}
