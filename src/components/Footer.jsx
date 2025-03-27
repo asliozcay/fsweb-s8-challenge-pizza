@@ -9,6 +9,8 @@ import insta3 from "../../images/iteration-2-images/footer/insta/li-2.png";
 import insta4 from "../../images/iteration-2-images/footer/insta/li-3.png";
 import insta5 from "../../images/iteration-2-images/footer/insta/li-4.png";
 import insta6 from "../../images/iteration-2-images/footer/insta/li-5.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 export default function Footer() {
   const Footer = styled.footer`
     background-color: #1a1a1a;
@@ -17,18 +19,21 @@ export default function Footer() {
     font-family: "Barlow", sans-serif;
     color: #ffffff;
     font-size: 1.125rem;
+    font-weight: 400;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+align-items: center;
   `;
   const Div = styled.div`
-    width: 60%;
-    justify-content: space-;
-    align-items: center;
+    width: 50%;
     display: flex;
+    align-items: center;
+    gap: 4rem;
   `;
   const ContactDiv = styled.div`
-    align-items: left;
     width: 33%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,25 +49,39 @@ export default function Footer() {
     padding: 3rem 0;
     padding-top: 5rem;
   `;
-  const TextDiv = styled.div``;
+  const TextDiv = styled.div`
+    gap: 3rem;
+  `;
   const Text = styled.p`
     line-height: 2rem;
   `;
 
-  const MenuDiv = styled(ContactDiv)``;
+  const MenuText = styled(Text)`
+    padding-top: 1rem;
+  `;
+
+  const MenuDiv = styled.div`
+    width: 33%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  `;
 
   const Title = styled(Text)`
     font-size: 1.5rem;
     font-weight: 500;
   `;
-  const ImgDiv = styled(TextDiv)`
-    justify-content: space-between;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+  const ImgDiv = styled.div`
+    padding-top: 3rem;
+    width: 33%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
   `;
 
   const SocialDiv = styled(ContactDiv)`
+    flex: 1;
     gap: 1rem;
     row-gap: 1rem;
   `;
@@ -71,6 +90,16 @@ export default function Footer() {
     height: 105px;
     object-fit: cover;
   `;
+  const FooterDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    width: 50%;
+  `;
+    const FooterText = styled.p`
+    font-size: 1rem;`
+    const Line = styled.hr`
+    border: 1px solid #ffffff;`
 
   return (
     <Footer>
@@ -93,12 +122,12 @@ export default function Footer() {
         <MenuDiv>
           <Title>Hot Menu</Title>
           <TextDiv>
-            <Text>Terminal Pizza</Text>
-            <Text>5 Kişilik Hackathlon Pizza</Text>
-            <Text>useEffect Tavuklu Pizza</Text>
-            <Text>Beyaz Console Frosty</Text>
-            <Text>Testler Geçti Mutlu Burger</Text>
-            <Text>Position Absolute Acı Burger</Text>
+            <MenuText>Terminal Pizza</MenuText>
+            <MenuText>5 Kişilik Hackathlon Pizza</MenuText>
+            <MenuText>useEffect Tavuklu Pizza</MenuText>
+            <MenuText>Beyaz Console Frosty</MenuText>
+            <MenuText>Testler Geçti Mutlu Burger</MenuText>
+            <MenuText>Position Absolute Acı Burger</MenuText>
           </TextDiv>
         </MenuDiv>
         <SocialDiv>
@@ -113,6 +142,11 @@ export default function Footer() {
           </ImgDiv>
         </SocialDiv>
       </Div>
+        <Line />
+        <FooterDiv>
+            <FooterText>© 2023 Teknolojik Yemekler.</FooterText>
+            <FontAwesomeIcon icon={faTwitter} style={{color: "#ffffff",}} />
+        </FooterDiv>
     </Footer>
   );
 }
