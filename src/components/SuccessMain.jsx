@@ -150,10 +150,10 @@ export default function SuccessMain(props) {
             <PriceDiv>
               <PriceTitle>Sipariş Toplamı</PriceTitle>
               <PriceText>
-                Seçimler<Price>{orderData.toppingPrice}₺</Price>
+                Seçimler<Price>{orderData.toppingPrice.toFixed(2)}₺</Price>
               </PriceText>
               <PriceText>
-                Toplam<Price>{orderData.totalPrice}₺</Price>
+                Toplam<Price>{orderData.totalPrice.toFixed(2)}₺</Price>
               </PriceText>
             </PriceDiv>
           </>

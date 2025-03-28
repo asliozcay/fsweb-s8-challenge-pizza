@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <Header>
       <Link to="/">
-        <img src={logo} alt="logo" data-cy="logo"/>
+        <img src={logo} alt="logo" data-cy="logo" />
       </Link>
     </Header>
   );

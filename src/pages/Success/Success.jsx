@@ -4,13 +4,12 @@ import SuccessMain from "../../components/SuccessMain";
 
 export default function Success(props) {
   const { orderData } = props;
-  
-  
+
   return (
     <>
-    <Header />
-    <SuccessMain orderData={orderData} />
-    <Footer />
+      <Header />
+      <SuccessMain orderData={orderData} />
+      <Footer />
     </>
-  ); 
+  );
 }

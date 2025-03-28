@@ -46,7 +46,7 @@ export default function OrderForm(props) {
     selectedToppings.length < 11 &&
     selectedSize &&
     selectedDough &&
-    name;
+    name.length >2;
 
   const validateField = (field, value) => {
     const newErrors = { ...errors };
