@@ -13,6 +13,6 @@ export default function OrderPizza(props) {
       <PizzaInfo pizzaPrice={pizzaPrice} />
       <OrderForm pizzaPrice={pizzaPrice} setOrderData={setOrderData} />
       <Footer />
-      </>
+    </>
   );
 }

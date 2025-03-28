@@ -1,9 +1,11 @@
-describe('Pizza Test', () => {
-  it('inputa metin girmek', () => {
-    cy.visit('http://localhost:5173/')
-    cy.get("[data-cy=home-button]").click()
-    cy.url().should('include', '/order-pizza')
-    cy.get("[data-cy=name-input]").type('Aslı')
+describe('Anasayfa tesleri', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:5173/');
+  });
+  
+  it('Metin kontrolü', () => {
+    cy.contains('KOD ACIKTIRIR PİZZA, DOYURUR');
+    
   })
   it("birden fazla malzeme seçmek", () => {
     cy.visit('http://localhost:5173/')

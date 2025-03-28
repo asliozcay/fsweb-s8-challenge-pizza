@@ -257,4 +257,9 @@
     justify-content: left;
     width: 90%;
   }
+  .food-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
 }

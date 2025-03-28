@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 5rem;
 }
 .pizza-size {
   flex-direction: column;
@@ -284,5 +285,10 @@ hr {
   }
   hr {
     width: 100%;
+  }
+  .size-dough {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }
