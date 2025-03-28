@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function OrderForm(props) {
-  const { pizzaPrice } = props;
+  const { pizzaPrice, setOrderData } = props;
   const toppings = [
     "Pepperoni",
     "Sosis",
@@ -104,23 +104,27 @@ export default function OrderForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const orderDetails = {
+      name: name,
+      size: selectedSize,
+      dough: selectedDough,
+      toppings: selectedToppings,
+      note: e.target.note.value,
+      orderCount: orderCount,
+      totalPrice: totalPrice * orderCount,
+      toppingPrice: toppingPrice,
+    };
+
     axios
-      .post(" https://reqres.in/api/pizza", {
-        name: name,
-        size: selectedSize,
-        dough: selectedDough,
-        toppings: selectedToppings,
-        note: e.target.note.value,
-        orderCount: orderCount,
-      })
+      .post(" https://reqres.in/api/pizza", orderDetails)
       .then((response) => {
         console.log(response.data);
+        setOrderData(orderDetails);
+        navigate("/success");
       })
       .catch((error) => {
         console.log(error);
       });
-
-    navigate("/success");
   };
 
   const useCheckMobileScreen = () => {
@@ -159,29 +163,38 @@ export default function OrderForm(props) {
                 <h3>
                   Boyut Seç<span className="red"> *</span>
                 </h3>
-                <span>
-                  <Input
-                    name="size-radio"
-                    type="radio"
-                    id="Kucuk"
-                    data-cy="kucuk-size-input"
-                  />
-                  <Label check htmlFor="Kucuk">
-                    Küçük
+                <div className="radio-buttons">
+                  <Label htmlFor="S" className="radio-label">
+                    <Input
+                      name="size-radio"
+                      type="radio"
+                      id="S"
+                      data-cy="s-size-input"
+                      className="radio-input"
+                    />
+                    <span className="radio-text">S</span>
                   </Label>
-                </span>
-                <span>
-                  <Input name="size-radio" type="radio" id="Orta" />
-                  <Label check htmlFor="Orta">
-                    Orta
+                  <Label htmlFor="M" className="radio-label">
+                    <Input
+                      name="size-radio"
+                      type="radio"
+                      id="M"
+                      data-cy="m-size-input"
+                      className="radio-input"
+                    />
+                    <span className="radio-text">M</span>
                   </Label>
-                </span>
-                <span>
-                  <Input name="size-radio" type="radio" id="Buyuk" />
-                  <Label check htmlFor="Buyuk">
-                    Büyük
+                  <Label htmlFor="L" className="radio-label">
+                    <Input
+                      name="size-radio"
+                      type="radio"
+                      id="L"
+                      data-cy="l-size-input"
+                      className="radio-input"
+                    />
+                    <span className="radio-text">L</span>
                   </Label>
-                </span>
+                </div>
                 {errors.size && <p className="error">{errors.size}</p>}
               </FormGroup>
               <FormGroup
@@ -199,10 +212,12 @@ export default function OrderForm(props) {
                   type="select"
                   data-cy="dough-select"
                 >
-                  <option hidden>Hamur Kalınlığı</option>
+                  <option hidden>--Hamur Kalınlığı Seç --</option>
+                  <option>Süpper İnce</option>
                   <option>İnce</option>
                   <option>Orta</option>
                   <option>Kalın</option>
+                  <option>Süpper Kalın</option>
                 </Input>
                 {errors.dough && <p className="error">{errors.dough}</p>}
               </FormGroup>
@@ -218,7 +233,12 @@ export default function OrderForm(props) {
                   const datacy = `input-topping-${index}`;
                   return (
                     <Label htmlFor={item} key={index}>
-                      <Input type="checkbox" id={item} data-cy={datacy} />
+                      <Input
+                        className="checkbox"
+                        type="checkbox"
+                        id={item}
+                        data-cy={datacy}
+                      />
                       {item}
                     </Label>
                   );

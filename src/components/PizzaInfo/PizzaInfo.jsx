@@ -1,10 +1,22 @@
+import { Link } from "react-router-dom";
 import "./index.css";
 export default function PizzaInfo(props) {
-const {pizzaPrice} = props
-  
+  const { pizzaPrice } = props;
+
   return (
     <section className="info">
-      <div className="container">
+      <div className="pizza-image"></div>
+
+      <div className="container-info">
+        <div className="links">
+          <Link className="homepage-link" to="/">
+            Anasayfa
+          </Link>
+          -
+          <Link className="order-link" to="/order-pizza">
+            Sipariş Oluştur
+          </Link>
+        </div>
         <h2>Position Absolute Acı Pizza</h2>
         <span className="price-info">
           <h3>{pizzaPrice.toFixed(2)}₺</h3>

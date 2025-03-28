@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export default function SuccessMain() {
+export default function SuccessMain(props) {
+  const { orderData } = props;
+
   const Main = styled.div`
     background-color: #ce2829;
     text-align: center;
@@ -130,28 +132,34 @@ export default function SuccessMain() {
   return (
     <Main>
       <Div>
-        <Title>lezzetin yolda</Title>
-        <Subtitle>SİPARİŞ ALINDI</Subtitle>
-        <AboutTitle>Position Absolute Acı Pizza</AboutTitle>
-        <AboutText>
-          Boyut: <Bold>L</Bold>
-        </AboutText>
-        <AboutText>
-          Hamur: <Bold>Süpper İnce</Bold>
-        </AboutText>
-        <AboutText>
-          Ek Malzemeler:
-          <Bold>Pepperoni, Sosis, Mısır, Ananas, Jalepeno</Bold>
-        </AboutText>
-        <PriceDiv>
-          <PriceTitle>Sipariş Toplamı</PriceTitle>
-          <PriceText>
-            Seçimler<Price>25.00₺</Price>
-          </PriceText>
-          <PriceText>
-            Toplam<Price>110.50₺</Price>
-          </PriceText>
-        </PriceDiv>
+        {orderData ? (
+          <>
+            <Title>lezzetin yolda</Title>
+            <Subtitle>SİPARİŞ ALINDI</Subtitle>
+            <AboutTitle>Position Absolute Acı Pizza</AboutTitle>
+            <AboutText>
+              Boyut: <Bold>{orderData.size}</Bold>
+            </AboutText>
+            <AboutText>
+              Hamur: <Bold>{orderData.dough}</Bold>
+            </AboutText>
+            <AboutText>
+              Ek Malzemeler:
+              <Bold>{orderData.toppings.join(", ")}</Bold>
+            </AboutText>
+            <PriceDiv>
+              <PriceTitle>Sipariş Toplamı</PriceTitle>
+              <PriceText>
+                Seçimler<Price>{orderData.toppingPrice}₺</Price>
+              </PriceText>
+              <PriceText>
+                Toplam<Price>{orderData.totalPrice}₺</Price>
+              </PriceText>
+            </PriceDiv>
+          </>
+        ) : (
+          <Subtitle>Sipariş Alınamadı!</Subtitle>
+        )}
       </Div>
     </Main>
   );
